@@ -131,22 +131,22 @@ STR_LEN = 240
 
 integer_data = []
 
-leds = [(0, 0, 0)] * STR_LEN
+leds = [(0, 0, 0)] * STR_LEN    #Initializes LED array of 0's
 
 for i in range(STR_LEN):
-    leds[i] = (0,0,abs(integer_data[i]))
+    leds[i] = (0,0,abs(integer_data[i]))    #Initializes LED color
 
-Offset = 0
-arraylength = 5000
+Offset = 0  #Initializes Offset value, or how much to shift the pixel over
+arraylength = 5000  #Set number instead of len(integer_data) to prevent accidental shutdown
 
 
 while time.time() < stop_time:
     
     for i in range(STR_LEN):
         datavalue = abs(integer_data[(i+Offset)])
-        leds[i] = (datavalue,datavalue,datavalue)
+        leds[i] = (datavalue,datavalue,datavalue)   #Changes RGB numerical value to the value at integer_data[i]
 
-    Offset = (Offset + 240) % arraylength   #Leaves remainder numebr of pixels to shift
+    Offset = (Offset + 240) % arraylength   #Leaves remainder number of pixels to shift
     
     if client.put_pixels(leds, channel=0):
         pass
